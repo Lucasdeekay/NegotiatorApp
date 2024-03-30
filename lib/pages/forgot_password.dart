@@ -155,7 +155,7 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
 
                               // Replace 'http://your_django_api_url/login' with your actual endpoint
                               final response = await http.post(
-                                Uri.parse('http://your_django_api_url/forgot_password'),
+                                Uri.parse('http://lucasdennis.pythonanywhere.com/forgot_password'),
                                 headers: <String, String>{
                                   'Content-Type': 'application/json; charset=UTF-8',
                                 },

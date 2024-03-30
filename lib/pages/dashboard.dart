@@ -12,10 +12,15 @@ import '../components/alert_manager.dart';
 class ProductItem extends StatelessWidget {
   final String product_id;
   final String product_name;
-  final String price;
+  final String actual_price;
+  final String discounted_price;
+  final String discount_percentage;
   final String rating;
+  final String rating_count;
+  final String image_path;
+  
 
-  ProductItem({required this.product_id, required this.product_name, required this.price, required this.rating});
+  ProductItem({required this.product_id, required this.product_name, required this.actual_price, required this.discounted_price, required this.discount_percentage, required this.rating, required this.rating_count, required this.image_path});
 
   @override
   Widget build(BuildContext context) {
@@ -55,7 +60,7 @@ class ProductItem extends StatelessWidget {
                     child: ClipRRect(
                       borderRadius: BorderRadius.circular(6),
                       child: Image.network(
-                        'https://images.unsplash.com/photo-1546069901-ba9599a7e63c?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1760&q=80',
+                        image_path,
                         width: 80,
                         height: 80,
                         fit: BoxFit.cover,
@@ -120,7 +125,7 @@ class ProductItem extends StatelessWidget {
                         padding: EdgeInsetsDirectional.fromSTEB(
                             0, 12, 4, 8),
                         child: Text(
-                          '\$$price',
+                          '\$$actual_price',
                           textAlign: TextAlign.end,
                           style: TextStyle(
                             fontSize: 14.0,
@@ -153,8 +158,12 @@ class ProductList {
       items.add(ProductItem(
         product_id: item['id'],
         product_name: item['name'],
-        price: item['price'],
+        actual_price: item['actual_price'],
+        discounted_price: item['discounted_price'],
+        discount_percentage: item['discount_percentage'],
         rating: item['rating'],
+        rating_count: item['rating_count'],
+        image_path: item['image_path'],
       ));
     }
 
@@ -184,7 +193,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
   Future<void> fetchData() async {
 
     try {
-      final response = await http.get(Uri.parse('http://your_django_api_url/dashboard'));
+      final response = await http.get(Uri.parse('http://lucasdennis.pythonanywhere.com/dashboard'));
 
 
       if (response.statusCode == 200) {

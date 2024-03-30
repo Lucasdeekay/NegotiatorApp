@@ -318,7 +318,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
 
                               // Replace 'http://your_django_api_url/login' with your actual endpoint
                               final response = await http.post(
-                                Uri.parse('http://your_django_api_url/register'),
+                                Uri.parse('http://lucasdennis.pythonanywhere.com/register'),
                                 headers: <String, String>{
                                   'Content-Type': 'application/json; charset=UTF-8',
                                 },

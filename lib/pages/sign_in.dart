@@ -243,7 +243,7 @@ class _SignInScreenState extends State<SignInScreen> {
 
                                 // Replace 'http://your_django_api_url/login' with your actual endpoint
                                 final response = await http.post(
-                                  Uri.parse('http://your_django_api_url/login'),
+                                  Uri.parse('http://lucasdennis.pythonanywhere.com/login'),
                                   headers: <String, String>{
                                     'Content-Type': 'application/json; charset=UTF-8',
                                   },

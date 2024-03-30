@@ -29,7 +29,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
   Future<void> fetchData() async {
 
     try {
-      final response = await http.get(Uri.parse('http://your_django_api_url/profile'));
+      final response = await http.get(Uri.parse('http://lucasdennis.pythonanywhere.com/profile'));
 
 
       if (response.statusCode == 200) {
@@ -151,7 +151,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                               highlightColor: Colors.transparent,
                               onTap: () async {
                                 final response = await http.post(
-                                  Uri.parse('http://your_django_api_url/logout'),
+                                  Uri.parse('http://lucasdennis.pythonanywhere.com/logout'),
                                   headers: <String, String>{
                                     'Content-Type': 'application/json; charset=UTF-8',
                                   },

@@ -275,7 +275,7 @@ class _RetrievePasswordScreenState extends State<RetrievePasswordScreen> {
 
                               // Replace 'http://your_django_api_url/login' with your actual endpoint
                               final response = await http.post(
-                                Uri.parse('http://your_django_api_url/retrieve_password'),
+                                Uri.parse('http://lucasdennis.pythonanywhere.com/retrieve_password'),
                                 headers: <String, String>{
                                   'Content-Type': 'application/json; charset=UTF-8',
                                 },

@@ -34,7 +34,7 @@ class ProductItem extends StatelessWidget {
           onTap: () async {
             // Handle "Sign In" tap (e.g., navigate to sign in screen)
             Navigator.of(context)
-                .push(createRoute(DetailsScreen(product_id: product_id,)));
+                .push(createRoute(DetailsScreen(productId: product_id, productName: product_name, actualPrice: actual_price, discountedPrice: discounted_price, discountPercentage: discount_percentage, rating: rating, ratingCount: rating_count, imagePath: image_path)));
           },
           child: Container(
             width: double.infinity,
@@ -91,15 +91,24 @@ class ProductItem extends StatelessWidget {
                             padding:
                             EdgeInsetsDirectional.fromSTEB(
                                 0, 4, 8, 0),
-                            child: AutoSizeText(
-                              '$rating',
-                              textAlign: TextAlign.start,
-                              style: TextStyle(
-                                fontSize: 14.0,
-                                fontWeight: FontWeight.normal,
-                                fontFamily: 'Plus Jakarta Sans',
-                                color: Colors.black,
-                              ),
+                            child: Row(
+                              children: [
+                                Icon(
+                                  Icons.favorite_rounded,
+                                  color: Colors.red,
+                                  size: 24,
+                                ),
+                                AutoSizeText(
+                                  '$rating',
+                                  textAlign: TextAlign.start,
+                                  style: TextStyle(
+                                    fontSize: 14.0,
+                                    fontWeight: FontWeight.normal,
+                                    fontFamily: 'Plus Jakarta Sans',
+                                    color: Colors.black,
+                                  ),
+                                ),
+                              ],
                             ),
                           ),
                         ],
@@ -156,14 +165,14 @@ class ProductList {
 
     for (var item in json) {
       items.add(ProductItem(
-        product_id: item['id'],
-        product_name: item['name'],
-        actual_price: item['actual_price'],
-        discounted_price: item['discounted_price'],
-        discount_percentage: item['discount_percentage'],
-        rating: item['rating'],
-        rating_count: item['rating_count'],
-        image_path: item['image_path'],
+        product_id: '${item['id']}',
+        product_name: '${item['name']}',
+        actual_price: '${item['actual_price']}',
+        discounted_price: '${item['discounted_price']}',
+        discount_percentage: '${item['discount_percentage']}',
+        rating: '${item['rating']}',
+        rating_count: '${item['rating_count']}',
+        image_path: '${item['image_path']}',
       ));
     }
 
@@ -194,7 +203,6 @@ class _DashboardScreenState extends State<DashboardScreen> {
 
     try {
       final response = await http.get(Uri.parse('http://lucasdennis.pythonanywhere.com/dashboard'));
-
 
       if (response.statusCode == 200) {
         final data = json.decode(response.body);

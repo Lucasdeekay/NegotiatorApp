@@ -40,16 +40,6 @@ class MyApp extends StatelessWidget {
         useMaterial3: true,
       ),
       home: const SplashScreen(),
-      routes: {
-        '/splash': (context) => SplashScreen(),
-        '/sign_in': (context) => SignInScreen(),
-        '/sign_up': (context) => SignUpScreen(),
-        '/forgot_password': (context) => ForgotPasswordScreen(),
-        '/retrieve_password': (context) => RetrievePasswordScreen(user: '',),
-        '/profile': (context) => ProfileScreen(),
-        '/dashboard': (context) => DashboardScreen(),
-        '/details': (context) => DetailsScreen(product_id: '1',),
-      },
     );
   }
 }

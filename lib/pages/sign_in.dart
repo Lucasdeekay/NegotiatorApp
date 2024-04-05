@@ -21,6 +21,8 @@ class _SignInScreenState extends State<SignInScreen> {
   TextEditingController passwordController = TextEditingController();
   late bool passwordVisibility = true;
 
+  final emailRegex = RegExp(r"[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*");
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -31,201 +33,205 @@ class _SignInScreenState extends State<SignInScreen> {
           Expanded(
             child: Padding(
               padding: EdgeInsets.all(24),
-              child: Column(
-                mainAxisSize: MainAxisSize.max,
-                mainAxisAlignment: MainAxisAlignment.start,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  NavigateArrow(),
-                  const Padding(
-                    padding: EdgeInsetsDirectional.fromSTEB(0, 24, 0, 0),
-                    child: Text(
-                      'Sign In',
-                      style: TextStyle(
-                        fontSize: 28.0,
-                        fontWeight: FontWeight.bold,
-                        fontFamily: 'Plus Jakarta Sans',
-                        color: Colors.black,
+              child: SingleChildScrollView(
+                child: Column(
+                  mainAxisSize: MainAxisSize.max,
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    NavigateArrow(),
+                    const Padding(
+                      padding: EdgeInsetsDirectional.fromSTEB(0, 24, 0, 0),
+                      child: Text(
+                        'Sign In',
+                        style: TextStyle(
+                          fontSize: 28.0,
+                          fontWeight: FontWeight.bold,
+                          fontFamily: 'Plus Jakarta Sans',
+                          color: Colors.black,
+                        ),
                       ),
                     ),
-                  ),
-                  Form(
-                    key: _formKey,
-                    autovalidateMode: AutovalidateMode.disabled,
-                    child: Column(
-                      mainAxisSize: MainAxisSize.max,
-                      children: [
-                        Padding(
-                          padding: EdgeInsetsDirectional.fromSTEB(0, 18, 0, 0),
-                          child: Column(
-                            mainAxisSize: MainAxisSize.max,
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              const Padding(
-                                padding:
-                                    EdgeInsetsDirectional.fromSTEB(0, 0, 0, 4),
-                                child: Text(
-                                  'Email',
-                                  style: TextStyle(
+                    Form(
+                      key: _formKey,
+                      autovalidateMode: AutovalidateMode.disabled,
+                      child: Column(
+                        mainAxisSize: MainAxisSize.max,
+                        children: [
+                          Padding(
+                            padding: EdgeInsetsDirectional.fromSTEB(0, 18, 0, 0),
+                            child: Column(
+                              mainAxisSize: MainAxisSize.max,
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                const Padding(
+                                  padding:
+                                  EdgeInsetsDirectional.fromSTEB(0, 0, 0, 4),
+                                  child: Text(
+                                    'Email',
+                                    style: TextStyle(
+                                      fontSize: 16.0,
+                                      fontWeight: FontWeight.normal,
+                                      fontFamily: 'Plus Jakarta Sans',
+                                      color: Colors.black,
+                                    ),
+                                  ),
+                                ),
+                                TextFormField(
+                                  controller: emailController,
+                                  autofillHints: [AutofillHints.email],
+                                  textInputAction: TextInputAction.next,
+                                  obscureText: false,
+                                  decoration: InputDecoration(
+                                    enabledBorder: OutlineInputBorder(
+                                      borderSide: const BorderSide(
+                                        color: Color(0x00000000),
+                                        width: 1,
+                                      ),
+                                      borderRadius: BorderRadius.circular(8),
+                                    ),
+                                    focusedBorder: OutlineInputBorder(
+                                      borderSide: const BorderSide(
+                                        color: Color(0x00000000),
+                                        width: 1,
+                                      ),
+                                      borderRadius: BorderRadius.circular(8),
+                                    ),
+                                    errorBorder: OutlineInputBorder(
+                                      borderSide: const BorderSide(
+                                        color: Color(0x00000000),
+                                        width: 1,
+                                      ),
+                                      borderRadius: BorderRadius.circular(8),
+                                    ),
+                                    focusedErrorBorder: OutlineInputBorder(
+                                      borderSide: const BorderSide(
+                                        color: Color(0x00000000),
+                                        width: 1,
+                                      ),
+                                      borderRadius: BorderRadius.circular(8),
+                                    ),
+                                    filled: true,
+                                    fillColor: Colors.white,
+                                  ),
+                                  style: const TextStyle(
                                     fontSize: 16.0,
                                     fontWeight: FontWeight.normal,
                                     fontFamily: 'Plus Jakarta Sans',
                                     color: Colors.black,
+                                    height: 1,
                                   ),
+                                  minLines: 1,
+                                  keyboardType: TextInputType.emailAddress,
+                                  cursorColor: Colors.blue,
+                                  validator: (value) {
+                                    if (value!.isEmpty) {
+                                      return 'Email is required';
+                                    } else if (!emailRegex.hasMatch(value)) {
+                                      return 'Invalid Email Address';
+                                    } else {
+                                      return null;
+                                    }
+                                  },
                                 ),
-                              ),
-                              TextFormField(
-                                controller: emailController,
-                                autofillHints: [AutofillHints.email],
-                                textInputAction: TextInputAction.next,
-                                obscureText: false,
-                                decoration: InputDecoration(
-                                  enabledBorder: OutlineInputBorder(
-                                    borderSide: const BorderSide(
-                                      color: Color(0x00000000),
-                                      width: 1,
-                                    ),
-                                    borderRadius: BorderRadius.circular(8),
-                                  ),
-                                  focusedBorder: OutlineInputBorder(
-                                    borderSide: const BorderSide(
-                                      color: Color(0x00000000),
-                                      width: 1,
-                                    ),
-                                    borderRadius: BorderRadius.circular(8),
-                                  ),
-                                  errorBorder: OutlineInputBorder(
-                                    borderSide: const BorderSide(
-                                      color: Color(0x00000000),
-                                      width: 1,
-                                    ),
-                                    borderRadius: BorderRadius.circular(8),
-                                  ),
-                                  focusedErrorBorder: OutlineInputBorder(
-                                    borderSide: const BorderSide(
-                                      color: Color(0x00000000),
-                                      width: 1,
-                                    ),
-                                    borderRadius: BorderRadius.circular(8),
-                                  ),
-                                  filled: true,
-                                  fillColor: Colors.white,
-                                ),
-                                style: const TextStyle(
-                                  fontSize: 16.0,
-                                  fontWeight: FontWeight.normal,
-                                  fontFamily: 'Plus Jakarta Sans',
-                                  color: Colors.black,
-                                  height: 1,
-                                ),
-                                minLines: 1,
-                                keyboardType: TextInputType.emailAddress,
-                                cursorColor: Colors.blue,
-                                validator: (value) {
-                                  if (value!.isEmpty) {
-                                    return 'Email is required';
-                                  }
-                                  return null;
-                                },
-                              ),
-                            ],
+                              ],
+                            ),
                           ),
-                        ),
-                        Padding(
-                          padding: EdgeInsetsDirectional.fromSTEB(0, 18, 0, 0),
-                          child: Column(
-                            mainAxisSize: MainAxisSize.max,
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              const Padding(
-                                padding:
-                                    EdgeInsetsDirectional.fromSTEB(0, 0, 0, 4),
-                                child: Text(
-                                  'Password',
-                                  style: TextStyle(
+                          Padding(
+                            padding: EdgeInsetsDirectional.fromSTEB(0, 18, 0, 0),
+                            child: Column(
+                              mainAxisSize: MainAxisSize.max,
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                const Padding(
+                                  padding:
+                                  EdgeInsetsDirectional.fromSTEB(0, 0, 0, 4),
+                                  child: Text(
+                                    'Password',
+                                    style: TextStyle(
+                                      fontSize: 16.0,
+                                      fontWeight: FontWeight.normal,
+                                      fontFamily: 'Plus Jakarta Sans',
+                                      color: Colors.black,
+                                    ),
+                                  ),
+                                ),
+                                TextFormField(
+                                  controller: passwordController,
+                                  autofillHints: [AutofillHints.password],
+                                  textInputAction: TextInputAction.done,
+                                  obscureText: passwordVisibility,
+                                  decoration: InputDecoration(
+                                    enabledBorder: OutlineInputBorder(
+                                      borderSide: const BorderSide(
+                                        color: Color(0x00000000),
+                                        width: 1,
+                                      ),
+                                      borderRadius: BorderRadius.circular(8),
+                                    ),
+                                    focusedBorder: OutlineInputBorder(
+                                      borderSide: const BorderSide(
+                                        color: Color(0x00000000),
+                                        width: 1,
+                                      ),
+                                      borderRadius: BorderRadius.circular(8),
+                                    ),
+                                    errorBorder: OutlineInputBorder(
+                                      borderSide: const BorderSide(
+                                        color: Color(0x00000000),
+                                        width: 1,
+                                      ),
+                                      borderRadius: BorderRadius.circular(8),
+                                    ),
+                                    focusedErrorBorder: OutlineInputBorder(
+                                      borderSide: const BorderSide(
+                                        color: Color(0x00000000),
+                                        width: 1,
+                                      ),
+                                      borderRadius: BorderRadius.circular(8),
+                                    ),
+                                    filled: true,
+                                    fillColor: Colors.white,
+                                    suffixIcon: InkWell(
+                                      onTap: () => setState(
+                                            () => passwordVisibility =
+                                        !passwordVisibility,
+                                      ),
+                                      focusNode:
+                                      FocusNode(skipTraversal: true),
+                                      child: Icon(
+                                        !passwordVisibility
+                                            ? Icons.visibility_outlined
+                                            : Icons.visibility_off_outlined,
+                                        color: Colors.grey,
+                                        size: 18,
+                                      ),
+                                    ),
+                                  ),
+                                  style: const TextStyle(
                                     fontSize: 16.0,
                                     fontWeight: FontWeight.normal,
                                     fontFamily: 'Plus Jakarta Sans',
                                     color: Colors.black,
+                                    height: 1,
                                   ),
+                                  minLines: 1,
+                                  keyboardType: TextInputType.visiblePassword,
+                                  cursorColor: Colors.blue,
+                                  validator: (value) {
+                                    if (value!.isEmpty) {
+                                      return 'Password is required';
+                                    }
+                                    return null;
+                                  },
                                 ),
-                              ),
-                              TextFormField(
-                                controller: passwordController,
-                                autofillHints: [AutofillHints.password],
-                                textInputAction: TextInputAction.done,
-                                obscureText: passwordVisibility,
-                                decoration: InputDecoration(
-                                  enabledBorder: OutlineInputBorder(
-                                    borderSide: const BorderSide(
-                                      color: Color(0x00000000),
-                                      width: 1,
-                                    ),
-                                    borderRadius: BorderRadius.circular(8),
-                                  ),
-                                  focusedBorder: OutlineInputBorder(
-                                    borderSide: const BorderSide(
-                                      color: Color(0x00000000),
-                                      width: 1,
-                                    ),
-                                    borderRadius: BorderRadius.circular(8),
-                                  ),
-                                  errorBorder: OutlineInputBorder(
-                                    borderSide: const BorderSide(
-                                      color: Color(0x00000000),
-                                      width: 1,
-                                    ),
-                                    borderRadius: BorderRadius.circular(8),
-                                  ),
-                                  focusedErrorBorder: OutlineInputBorder(
-                                    borderSide: const BorderSide(
-                                      color: Color(0x00000000),
-                                      width: 1,
-                                    ),
-                                    borderRadius: BorderRadius.circular(8),
-                                  ),
-                                  filled: true,
-                                  fillColor: Colors.white,
-                                  suffixIcon: InkWell(
-                                    onTap: () => setState(
-                                          () => passwordVisibility =
-                                      !passwordVisibility,
-                                    ),
-                                    focusNode:
-                                    FocusNode(skipTraversal: true),
-                                    child: Icon(
-                                      !passwordVisibility
-                                          ? Icons.visibility_outlined
-                                          : Icons.visibility_off_outlined,
-                                      color: Colors.grey,
-                                      size: 18,
-                                    ),
-                                  ),
-                                ),
-                                style: const TextStyle(
-                                  fontSize: 16.0,
-                                  fontWeight: FontWeight.normal,
-                                  fontFamily: 'Plus Jakarta Sans',
-                                  color: Colors.black,
-                                  height: 1,
-                                ),
-                                minLines: 1,
-                                keyboardType: TextInputType.visiblePassword,
-                                cursorColor: Colors.blue,
-                                validator: (value) {
-                                  if (value!.isEmpty) {
-                                    return 'Password is required';
-                                  }
-                                  return null;
-                                },
-                              ),
-                            ],
+                              ],
+                            ),
                           ),
-                        ),
-                      ],
+                        ],
+                      ),
                     ),
-                  ),
-                  Padding(
+                    Padding(
                       padding: EdgeInsetsDirectional.fromSTEB(0, 24, 0, 0),
                       child: Row(
                         mainAxisSize: MainAxisSize.max,
@@ -262,7 +268,7 @@ class _SignInScreenState extends State<SignInScreen> {
                                   Future.delayed(Duration(seconds: 3), () {
                                     // Pass the token to the home screen (or handle it appropriately)
                                     Navigator.of(context).pushAndRemoveUntil(
-                                      createRoute(ProfileScreen()),
+                                      createRoute(ProfileScreen(username: data['username'])),
                                           (route) => false,
                                     );
                                   });
@@ -288,38 +294,39 @@ class _SignInScreenState extends State<SignInScreen> {
                           ),
                         ],
                       ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsetsDirectional.fromSTEB(0, 12, 0, 0),
-                    child: InkWell(
-                      splashColor: Colors.transparent,
-                      focusColor: Colors.transparent,
-                      hoverColor: Colors.transparent,
-                      highlightColor: Colors.transparent,
-                      onTap: () async {
-                        // Handle "Sign In" tap (e.g., navigate to sign in screen)
-                        Navigator.of(context).push(createRoute(ForgotPasswordScreen()));
-                      },
-                      child: const Row(
-                        mainAxisSize: MainAxisSize.max,
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Padding(
-                            padding:
-                                EdgeInsetsDirectional.fromSTEB(0, 12, 0, 12),
-                            child: Text(
-                              'I don\'t remember my password',
-                              style: TextStyle(
-                                fontSize: 12.0,
-                                color: Colors.black87, // Lighter text color
+                    ),
+                    Padding(
+                      padding: const EdgeInsetsDirectional.fromSTEB(0, 12, 0, 0),
+                      child: InkWell(
+                        splashColor: Colors.transparent,
+                        focusColor: Colors.transparent,
+                        hoverColor: Colors.transparent,
+                        highlightColor: Colors.transparent,
+                        onTap: () async {
+                          // Handle "Sign In" tap (e.g., navigate to sign in screen)
+                          Navigator.of(context).push(createRoute(ForgotPasswordScreen()));
+                        },
+                        child: const Row(
+                          mainAxisSize: MainAxisSize.max,
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Padding(
+                              padding:
+                              EdgeInsetsDirectional.fromSTEB(0, 12, 0, 12),
+                              child: Text(
+                                'I don\'t remember my password',
+                                style: TextStyle(
+                                  fontSize: 12.0,
+                                  color: Colors.black87, // Lighter text color
+                                ),
                               ),
                             ),
-                          ),
-                        ],
+                          ],
+                        ),
                       ),
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
             ),
           ),

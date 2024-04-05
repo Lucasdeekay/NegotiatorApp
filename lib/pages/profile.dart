@@ -9,7 +9,8 @@ import '../components/greeting.dart';
 import '../components/route_manager.dart';
 
 class ProfileScreen extends StatefulWidget {
-  const ProfileScreen({Key? key}) : super(key: key);
+  final String username;
+  const ProfileScreen({Key? key, required this.username}) : super(key: key);
 
   @override
   _ProfileScreenState createState() => _ProfileScreenState();
@@ -23,31 +24,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
   @override
   void initState() {
     super.initState();
-    fetchData();
-  }
-
-  Future<void> fetchData() async {
-
-    try {
-      final response = await http.get(Uri.parse('http://lucasdennis.pythonanywhere.com/profile'));
-
-
-      if (response.statusCode == 200) {
-        final data = json.decode(response.body);
-
-        setState(() {
-          username = data['username'];
-        });
-      } else {
-        // Handle API error
-        errorFlushbar(context, "Error", 'Failed to load student details. Kindly login');
-        Navigator.of(context).pushAndRemoveUntil(createRoute(SignInScreen()), (route) => false);
-      }
-    } catch (e) {
-      // Handle other errors
-      errorFlushbar(context, "Error", '$e');
-      Navigator.of(context).pushAndRemoveUntil(createRoute(SignInScreen()), (route) => false);
-    }
+    username = widget.username;
   }
 
   @override
@@ -70,7 +47,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     Padding(
                       padding: EdgeInsetsDirectional.fromSTEB(0, 36, 0, 6),
                       child: Text(
-                        '${const GreetingWidget()}',
+                        greeting(),
                         style: const TextStyle(
                           fontSize: 14.0,
                           fontWeight: FontWeight.normal,

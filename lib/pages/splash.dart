@@ -22,18 +22,6 @@ class _SplashScreenState extends State<SplashScreen> {
           mainAxisSize: MainAxisSize.min, // Center content vertically
           children: [
             SizedBox(height: MediaQuery.of(context).size.height * 0.25), // Top padding
-            Container(
-              width: 150.0,
-              height: 150.0,
-              decoration: BoxDecoration(
-                color: Colors.white, // Container background color
-                borderRadius: BorderRadius.circular(32.0), // Rounded corners
-                image: const DecorationImage(
-                  image: AssetImage('logo.png'), // Assuming logo image is in assets folder
-                  fit: BoxFit.cover,
-                ),
-              ),
-            ),
             Padding(
               padding: const EdgeInsets.only(top: 24.0), // Spacing after logo
               child: RichText(

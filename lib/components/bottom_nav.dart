@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:negotiator/components/route_manager.dart';
+
+import '../pages/dashboard.dart';
 
 Widget BottomBar(BuildContext context, int index){
   return BottomNavigationBar(
@@ -33,7 +36,7 @@ Widget BottomBar(BuildContext context, int index){
       // Handle navigation here
       if (index == 0) {
         // Navigate to the Product
-        Navigator.pushNamed(context, '/splash');
+        Navigator.of(context).push(createRoute(DashboardScreen()));
       } else if (index == 1) {
         // Navigate to profile
         Navigator.pushNamed(context, '/profile');

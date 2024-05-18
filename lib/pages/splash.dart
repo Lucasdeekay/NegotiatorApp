@@ -59,7 +59,7 @@ class _SplashScreenState extends State<SplashScreen> {
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(36.0), // Button corner radius
                 ),
-                minimumSize: const Size(400, 50), // Set minimum button size
+                minimumSize: const Size(250, 50), // Set minimum button size
               ),
               child: const Text('Get Started'),
             ),

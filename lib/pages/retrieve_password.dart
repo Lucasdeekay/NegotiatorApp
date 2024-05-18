@@ -276,11 +276,11 @@ class _RetrievePasswordScreenState extends State<RetrievePasswordScreen> {
 
                                 // Replace 'http://your_django_api_url/login' with your actual endpoint
                                 final response = await http.post(
-                                  Uri.parse('http://lucasdennis.pythonanywhere.com/retrieve_password'),
-                                  headers: <String, String>{
-                                    'Content-Type': 'application/json; charset=UTF-8',
+                                  Uri.parse('https://www.priceprediction.com.ng/retrieve_password'),
+                                  headers: {
+                                    'Content-Type': 'application/json',
                                   },
-                                  body: jsonEncode(<String, String>{
+                                  body: jsonEncode({
                                     'user_id': _user,
                                     'password': password,
                                   }),
@@ -311,7 +311,7 @@ class _RetrievePasswordScreenState extends State<RetrievePasswordScreen> {
                               shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(36.0), // Button corner radius
                               ),
-                              minimumSize: const Size(400, 50), // Set minimum button size
+                              minimumSize: const Size(250, 50), // Set minimum button size
                             ),
                             child: const Text('Change Password'),
                           ),

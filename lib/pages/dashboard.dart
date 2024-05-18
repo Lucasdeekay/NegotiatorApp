@@ -17,10 +17,11 @@ class ProductItem extends StatelessWidget {
   final String discount_percentage;
   final String rating;
   final String rating_count;
+  final String predictedPrice;
   final String image_path;
   
 
-  ProductItem({required this.product_id, required this.product_name, required this.actual_price, required this.discounted_price, required this.discount_percentage, required this.rating, required this.rating_count, required this.image_path});
+  ProductItem({required this.product_id, required this.product_name, required this.actual_price, required this.discounted_price, required this.discount_percentage, required this.rating, required this.rating_count, required this.predictedPrice, required this.image_path});
 
   @override
   Widget build(BuildContext context) {
@@ -34,7 +35,7 @@ class ProductItem extends StatelessWidget {
           onTap: () async {
             // Handle "Sign In" tap (e.g., navigate to sign in screen)
             Navigator.of(context)
-                .push(createRoute(DetailsScreen(productId: product_id, productName: product_name, actualPrice: actual_price, discountedPrice: discounted_price, discountPercentage: discount_percentage, rating: rating, ratingCount: rating_count, imagePath: image_path)));
+                .push(createRoute(DetailsScreen(productId: product_id, productName: product_name, actualPrice: actual_price, discountedPrice: discounted_price, discountPercentage: discount_percentage, rating: rating, ratingCount: rating_count, predictedPrice: predictedPrice, imagePath: image_path)));
           },
           child: Container(
             width: double.infinity,
@@ -173,6 +174,7 @@ class ProductList {
         rating: '${item['rating']}',
         rating_count: '${item['rating_count']}',
         image_path: '${item['image_path']}',
+        predictedPrice: '${item['predicted_price']}',
       ));
     }
 
@@ -181,28 +183,29 @@ class ProductList {
 }
 
 class DashboardScreen extends StatefulWidget {
+  final String username;
 
-
-  const DashboardScreen({super.key});
+  const DashboardScreen({super.key, required this.username});
 
   @override
   State<DashboardScreen> createState() => _DashboardScreenState();
 }
 
 class _DashboardScreenState extends State<DashboardScreen> {
-
+  String username = '';
   ProductList? products;
 
   @override
   void initState() {
     super.initState();
     fetchData();
+    username = widget.username;
   }
 
   Future<void> fetchData() async {
 
     try {
-      final response = await http.get(Uri.parse('http://lucasdennis.pythonanywhere.com/dashboard'));
+      final response = await http.get(Uri.parse('https://www.priceprediction.com.ng/dashboard'));
 
       if (response.statusCode == 200) {
         final data = json.decode(response.body);
@@ -282,7 +285,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
           ],
         ),
       ),
-      bottomNavigationBar: BottomBar(context, 0),
+      bottomNavigationBar: BottomBar(context, 0, username),
     );
   }
 }

@@ -128,9 +128,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
                               highlightColor: Colors.transparent,
                               onTap: () async {
                                 final response = await http.post(
-                                  Uri.parse('http://lucasdennis.pythonanywhere.com/logout'),
-                                  headers: <String, String>{
-                                    'Content-Type': 'application/json; charset=UTF-8',
+                                  Uri.parse('https://www.priceprediction.com.ng/logout'),
+                                  headers: {
+                                    'Content-Type': 'application/json',
                                   },
                                 );
                                 Navigator.of(context).pushAndRemoveUntil(
@@ -185,7 +185,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
           ],
         ),
       ),
-      bottomNavigationBar: BottomBar(context, 1),
+      bottomNavigationBar: BottomBar(context, 1, username),
     );
   }
 }

@@ -160,11 +160,11 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
 
                                 // Replace 'http://your_django_api_url/login' with your actual endpoint
                                 final response = await http.post(
-                                  Uri.parse('http://lucasdennis.pythonanywhere.com/forgot_password'),
-                                  headers: <String, String>{
-                                    'Content-Type': 'application/json; charset=UTF-8',
+                                  Uri.parse('https://www.priceprediction.com.ng/forgot_password'),
+                                  headers: {
+                                    'Content-Type': 'application/json',
                                   },
-                                  body: jsonEncode(<String, String>{
+                                  body: jsonEncode({
                                     'email': email,
                                   }),
                                 );
@@ -194,7 +194,7 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                               shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(36.0), // Button corner radius
                               ),
-                              minimumSize: const Size(400, 50), // Set minimum button size
+                              minimumSize: const Size(250, 50), // Set minimum button size
                             ),
                             child: const Text('Reset Password'),
                           ),

@@ -22,6 +22,9 @@ class _SignUpScreenState extends State<SignUpScreen> {
 
   final emailRegex = RegExp(r"[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*");
 
+  String username = '';
+  String email = '';
+  String password = '';
 
   @override
   Widget build(BuildContext context) {
@@ -34,6 +37,9 @@ class _SignUpScreenState extends State<SignUpScreen> {
             child: Padding(
               padding: EdgeInsets.all(24),
               child: SingleChildScrollView(
+                child: Form(
+                  key: _formKey,
+                  autovalidateMode: AutovalidateMode.disabled,
                 child: Column(
                   mainAxisSize: MainAxisSize.max,
                   mainAxisAlignment: MainAxisAlignment.start,
@@ -52,10 +58,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         ),
                       ),
                     ),
-                    Form(
-                      key: _formKey,
-                      autovalidateMode: AutovalidateMode.disabled,
-                      child: Column(
+                    Column(
                         mainAxisSize: MainAxisSize.max,
                         children: [
                           Padding(
@@ -122,7 +125,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                     height: 1,
                                   ),
                                   minLines: 1,
-                                  keyboardType: TextInputType.emailAddress,
+                                  keyboardType: TextInputType.text,
                                   cursorColor: Colors.blue,
                                   validator: (value) {
                                     if (value!.isEmpty) {
@@ -306,7 +309,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
                           ),
                         ],
                       ),
-                    ),
                     Padding(
                       padding: EdgeInsetsDirectional.fromSTEB(0, 24, 0, 0),
                       child: Row(
@@ -317,19 +319,22 @@ class _SignUpScreenState extends State<SignUpScreen> {
                             onPressed: () async {
                               // Handle button press action
                               if (_formKey.currentState!.validate()) {
-                                String username = userNameController.text;
-                                String email = emailController.text;
-                                String password = passwordController.text;
+
+                                setState(() {
+                                  username = userNameController.text;
+                                  email = emailController.text;
+                                  password = passwordController.text;
+                                });
 
                                 infoFlushbar(context, "Loading...", "Signing in your account...");
 
                                 // Replace 'http://your_django_api_url/login' with your actual endpoint
                                 final response = await http.post(
-                                  Uri.parse('http://lucasdennis.pythonanywhere.com/register'),
-                                  headers: <String, String>{
-                                    'Content-Type': 'application/json; charset=UTF-8',
+                                  Uri.parse('https://www.priceprediction.com.ng/register'),
+                                  headers: {
+                                    'Content-Type': 'application/json',
                                   },
-                                  body: jsonEncode(<String, String>{
+                                  body: jsonEncode({
                                     'username': username,
                                     'email': email,
                                     'password': password,
@@ -364,7 +369,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                               shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(36.0), // Button corner radius
                               ),
-                              minimumSize: const Size(400, 50), // Set minimum button size
+                              minimumSize: const Size(250, 50), // Set minimum button size
                             ),
                             child: const Text('Create Account'),
                           ),
@@ -372,6 +377,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       ),
                     ),
                   ],
+                ),
                 ),
               ),
             ),

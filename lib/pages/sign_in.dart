@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:negotiator/components/nav_arrow.dart';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
+import 'package:negotiator/pages/dashboard.dart';
 import 'package:negotiator/pages/forgot_password.dart';
 import 'package:negotiator/pages/profile.dart';
 import 'package:negotiator/pages/sign_up.dart';
@@ -249,11 +250,11 @@ class _SignInScreenState extends State<SignInScreen> {
 
                                 // Replace 'http://your_django_api_url/login' with your actual endpoint
                                 final response = await http.post(
-                                  Uri.parse('http://lucasdennis.pythonanywhere.com/login'),
-                                  headers: <String, String>{
-                                    'Content-Type': 'application/json; charset=UTF-8',
+                                  Uri.parse('https://www.priceprediction.com.ng/login'),
+                                  headers: {
+                                    'Content-Type': 'application/json',
                                   },
-                                  body: jsonEncode(<String, String>{
+                                  body: jsonEncode({
                                     'email': email,
                                     'password': password,
                                   }),
@@ -268,7 +269,7 @@ class _SignInScreenState extends State<SignInScreen> {
                                   Future.delayed(Duration(seconds: 3), () {
                                     // Pass the token to the home screen (or handle it appropriately)
                                     Navigator.of(context).pushAndRemoveUntil(
-                                      createRoute(ProfileScreen(username: data['username'])),
+                                      createRoute(DashboardScreen(username: data['username'])),
                                           (route) => false,
                                     );
                                   });
@@ -288,7 +289,7 @@ class _SignInScreenState extends State<SignInScreen> {
                               shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(36.0), // Button corner radius
                               ),
-                              minimumSize: const Size(400, 50), // Set minimum button size
+                              minimumSize: const Size(250, 50), // Set minimum button size
                             ),
                             child: const Text('Sign In'),
                           ),

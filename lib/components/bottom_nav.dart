@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:negotiator/components/route_manager.dart';
+import 'package:negotiator/pages/profile.dart';
 
 import '../pages/dashboard.dart';
 
-Widget BottomBar(BuildContext context, int index){
+Widget BottomBar(BuildContext context, int index, String username){
   return BottomNavigationBar(
     // Navigation Bar at the bottom
     backgroundColor: Colors.white,
@@ -36,10 +37,10 @@ Widget BottomBar(BuildContext context, int index){
       // Handle navigation here
       if (index == 0) {
         // Navigate to the Product
-        Navigator.of(context).push(createRoute(DashboardScreen()));
+        Navigator.of(context).push(createRoute(DashboardScreen(username: username)));
       } else if (index == 1) {
         // Navigate to profile
-        Navigator.pushNamed(context, '/profile');
+        Navigator.of(context).push(createRoute(ProfileScreen(username: username)));
       }
     },
   );

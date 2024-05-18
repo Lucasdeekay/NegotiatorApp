@@ -13,10 +13,11 @@ class DetailsScreen extends StatefulWidget {
   final String discountPercentage;
   final String rating;
   final String ratingCount;
+  final String predictedPrice;
   final String imagePath;
 
   const DetailsScreen(
-      {super.key, required this.productId, required this.productName, required this.actualPrice, required this.discountedPrice, required this.discountPercentage, required this.rating, required this.ratingCount, required this.imagePath});
+      {super.key, required this.productId, required this.productName, required this.actualPrice, required this.discountedPrice, required this.discountPercentage, required this.rating, required this.ratingCount, required this.predictedPrice, required this.imagePath});
 
   @override
   State<DetailsScreen> createState() => _DetailsScreenState();
@@ -43,41 +44,9 @@ class _DetailsScreenState extends State<DetailsScreen> {
     discountedPrice = widget.discountedPrice;
     discountPercentage = widget.discountPercentage;
     rating = widget.rating;
+    predictedPrice = widget.predictedPrice;
     ratingCount = widget.ratingCount;
     imagePath = widget.imagePath;
-    fetchData();
-  }
-
-  Future<void> fetchData() async {
-    try {
-      final response = await http.post(
-        Uri.parse('http://lucasdennis.pythonanywhere.com/forgot_password'),
-        headers: <String, String>{
-          'Content-Type': 'application/json; charset=UTF-8',
-        },
-        body: jsonEncode(<String, String>{
-          'discounted_price': discountedPrice,
-          'discount_percentage': discountPercentage,
-          'rating': rating,
-          'rating_count': ratingCount,
-        }),
-      );
-
-
-      if (response.statusCode == 200) {
-        final data = json.decode(response.body);
-
-        setState(() {
-          predictedPrice = data['predicted_price'];
-        });
-      } else {
-        // Handle API error
-        errorFlushbar(context, "Error", 'Failed to load product details');
-      }
-    } catch (e) {
-      // Handle other errors
-      errorFlushbar(context, "Error", '$e');
-    }
   }
 
   @override
